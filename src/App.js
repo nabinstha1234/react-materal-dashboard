@@ -4,7 +4,6 @@ import { Toaster } from 'react-hot-toast';
 import { AppProvider } from 'providers/app';
 import { Routes } from 'providers/routes';
 import ThemeProvider from 'theme';
-// import { Counter } from 'features/counter/Counter';
 import './App.css';
 
 function App() {

@@ -54,8 +54,8 @@ const DashbordSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
           PaperProps={{
             sx: {
               width: DRAWER_WIDTH,
-              bgcolor: 'background.default',
-              borderRightStyle: 'dashed',
+              bgcolor: 'background.common.white',
+              borderRightStyle: `1px solid palette.primary.light`,
             },
           }}
         >

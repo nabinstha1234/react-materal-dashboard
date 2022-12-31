@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { alpha, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import { NavLink as RouterLink } from 'react-router-dom';
 import { Box, List, Collapse, ListItemText } from '@mui/material';
 
@@ -10,7 +10,7 @@ import { ListItemIconStyle, ListItemStyle } from './styles';
 const NavItem = ({ item, active }) => {
   const theme = useTheme();
   const isActiveRoot = active(item.path);
-  const { title, path, icon, info, children } = item;
+  const { title, path, icon, info, children, fillIcon } = item;
   const [open, setOpen] = useState(isActiveRoot);
 
   const handleOpen = () => {
@@ -20,8 +20,8 @@ const NavItem = ({ item, active }) => {
   const activeRootStyle = {
     color: 'primary.main',
     fontWeight: 'fontWeightMedium',
-    bgcolor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
-    '&:before': { display: 'block' },
+    bgcolor: theme.palette.primary.light,
+    border: 'none',
   };
 
   const activeSubStyle = {
@@ -92,16 +92,14 @@ const NavItem = ({ item, active }) => {
   }
 
   return (
-    <ListItemStyle
-      component={RouterLink}
-      to={path}
-      sx={{
-        ...(isActiveRoot && activeRootStyle),
-      }}
-    >
-      <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
-      <ListItemText disableTypography primary={title} />
-      {info && info}
+    <ListItemStyle component={RouterLink} to={path}>
+      <ListItemIconStyle
+        sx={{
+          ...(isActiveRoot && activeRootStyle),
+        }}
+      >
+        {isActiveRoot ? fillIcon : icon}
+      </ListItemIconStyle>
     </ListItemStyle>
   );
 };

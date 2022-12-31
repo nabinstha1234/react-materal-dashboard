@@ -1,19 +1,55 @@
 import { ReactIcon } from 'components/molecules';
 import config from 'config';
 
-const getIcon = (name) => <ReactIcon icon={name} width={22} height={22} />;
+const getIcon = (name) => <ReactIcon icon={name} width={30} height={30} />;
 
 const {
-  roles: { Admin, SuperAdmin, Employee },
+  roles: { Admin, SuperAdmin, Employee, HR },
 } = config;
 
-const allRole = [SuperAdmin, Admin, Employee];
+const allRole = [SuperAdmin, Admin, Employee, HR];
 
 const sidebarConfig = [
   {
     title: 'Dashboard',
     path: '/',
-    icon: getIcon('eva:pie-chart-2-fill'),
+    icon: getIcon('ph:house-light'),
+    fillIcon: getIcon('mdi:house'),
+    roles: allRole,
+  },
+  {
+    title: 'Users',
+    path: '/users',
+    icon: getIcon('ic:outline-today'),
+    fillIcon: getIcon('ic:round-today'),
+    roles: allRole,
+  },
+  {
+    title: 'log',
+    path: '/log',
+    icon: getIcon('material-symbols:receipt-long-outline-rounded'),
+    fillIcon: getIcon('material-symbols:receipt-long-rounded'),
+    roles: allRole,
+  },
+  {
+    title: 'Account',
+    path: '/account',
+    icon: getIcon('material-symbols:account-balance-outline'),
+    fillIcon: getIcon('material-symbols:account-balance'),
+    roles: allRole,
+  },
+  {
+    title: 'Event',
+    path: '/event',
+    icon: getIcon('material-symbols:event-busy-outline'),
+    fillIcon: getIcon('material-symbols:event-busy'),
+    roles: allRole,
+  },
+  {
+    title: 'Description',
+    path: '/description',
+    icon: getIcon('material-symbols:description-outline'),
+    fillIcon: getIcon('material-symbols:description'),
     roles: allRole,
   },
 ];

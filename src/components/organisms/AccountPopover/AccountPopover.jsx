@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { alpha } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Divider,
@@ -11,7 +12,10 @@ import {
   IconButton,
   Popover,
 } from '@mui/material';
+
 import { ReactIcon } from 'components/molecules';
+import { removeToken } from 'utils/token';
+import config from 'config';
 
 const MENU_OPTIONS = [
   {
@@ -26,6 +30,8 @@ const MENU_OPTIONS = [
 
 const AccountPopover = () => {
   const [open, setOpen] = useState(null);
+  const theme = useTheme();
+  const navigate = useNavigate();
 
   const { userResponse } = useSelector((state) => state.auth);
 
@@ -35,6 +41,17 @@ const AccountPopover = () => {
 
   const handleClose = () => {
     setOpen(null);
+  };
+
+  const handleLogout = () => {
+    removeToken({
+      name: config.tokenName,
+    });
+    removeToken({
+      name: config.refreshTokenName,
+    });
+    handleClose();
+    navigate('/login');
   };
 
   return (
@@ -57,7 +74,7 @@ const AccountPopover = () => {
         }}
       >
         <Avatar src={userResponse?.profile_url} alt="photoURL">
-          {userResponse?.profile_url ? '' : userResponse?.username[0]}
+          {userResponse?.profile_url ? '' : userResponse?.username?.[0]}
         </Avatar>
       </IconButton>
 
@@ -72,7 +89,7 @@ const AccountPopover = () => {
             p: 0,
             mt: 1.5,
             ml: 0.75,
-            width: 180,
+            width: 190,
             '& .MuiMenuItem-root': {
               typography: 'body2',
               borderRadius: 0.75,
@@ -93,16 +110,38 @@ const AccountPopover = () => {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={handleClose}>
-              <ReactIcon icon={option.icon} /> &nbsp; {option.label}
+            <MenuItem
+              key={option.label}
+              sx={{
+                color: theme.palette.primary.darker,
+              }}
+              onClick={handleClose}
+            >
+              <ReactIcon
+                icon={option.icon}
+                height={20}
+                width={20}
+                sx={{
+                  color: theme.palette.primary.darker,
+                }}
+              />
+              &nbsp; {option.label}
             </MenuItem>
           ))}
         </Stack>
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
-          <ReactIcon icon="material-symbols:logout-rounded" /> &nbsp; Logout
+        <MenuItem onClick={handleLogout} sx={{ m: 1, color: theme.palette.primary.darker }}>
+          <ReactIcon
+            icon="material-symbols:logout-rounded"
+            sx={{
+              color: theme.palette.primary.darker,
+            }}
+            height={20}
+            width={20}
+          />
+          &nbsp; Logout
         </MenuItem>
       </Popover>
     </>
