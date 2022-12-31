@@ -4,9 +4,20 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+To setup project.
+...
+
+### create dev.env file in root directory from dev.env.example
+
+### Put REACT_APP_API_URL=
+
+### npm run start:dev
+
+Note: To work dev env variable always start project using above commands.
+
 In the project directory, you can run:
 
-### `npm start`
+### `npm run start:dev`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
