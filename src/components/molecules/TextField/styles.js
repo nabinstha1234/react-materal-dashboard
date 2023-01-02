@@ -30,6 +30,9 @@ export const BootstrapInput = styled(InputBase)(({ theme }) => ({
       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
       borderColor: theme.palette.primary.main,
     },
+    '::placeholder': {
+      color: theme.palette.secondary.darker,
+    },
   },
 }));
 

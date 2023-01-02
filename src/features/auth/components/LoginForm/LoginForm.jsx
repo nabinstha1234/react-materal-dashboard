@@ -82,6 +82,7 @@ export const LoginForm = (props) => {
                 autoComplete="username"
                 type="email"
                 label="Email address"
+                placeholder="Enter your email"
                 onChange={onChange}
                 startAdornment={<ReactIcon width={20} icon="ic:outline-email" />}
                 value={value}
@@ -100,6 +101,7 @@ export const LoginForm = (props) => {
               autoComplete="current-password"
               onChange={onChange}
               value={value}
+              placeholder="Enter your password"
               type={showPassword ? 'text' : 'password'}
               label="Password"
               startAdornment={<ReactIcon width={20} icon="eva:lock-outline" />}
