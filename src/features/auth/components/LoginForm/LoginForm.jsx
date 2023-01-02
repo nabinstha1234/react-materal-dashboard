@@ -5,17 +5,9 @@ import { useForm, Controller, useWatch } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import {
-  Link,
-  Stack,
-  Checkbox,
-  TextField,
-  IconButton,
-  InputAdornment,
-  FormControlLabel,
-} from '@mui/material';
+import { Link, Stack, Checkbox, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
 
-import { ReactIcon } from 'components/molecules';
+import { ReactIcon, TextField } from 'components/molecules';
 import AuthService from 'features/auth/Api/authService';
 import { login } from 'features/auth/slice/AuthSlice';
 import { setToken } from 'utils/token';
@@ -91,6 +83,7 @@ export const LoginForm = (props) => {
                 type="email"
                 label="Email address"
                 onChange={onChange}
+                startAdornment={<ReactIcon width={20} icon="ic:outline-email" />}
                 value={value}
                 error={Boolean(error?.message)}
                 helperText={error?.message}
@@ -109,15 +102,14 @@ export const LoginForm = (props) => {
               value={value}
               type={showPassword ? 'text' : 'password'}
               label="Password"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handleShowPassword} edge="end">
-                      <ReactIcon icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
+              startAdornment={<ReactIcon width={20} icon="eva:lock-outline" />}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton onClick={handleShowPassword} edge="end">
+                    <ReactIcon icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                  </IconButton>
+                </InputAdornment>
+              }
               error={Boolean(error?.message)}
               helperText={error?.message}
             />
