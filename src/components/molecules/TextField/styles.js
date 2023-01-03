@@ -24,7 +24,7 @@ export const BootstrapInput = styled(InputBase)(({ theme }) => ({
     position: 'relative',
     backgroundColor: theme.palette.secondary.main,
     fontSize: 14,
-    padding: '8px 16px 8px 35px',
+    padding: '8px 32px',
     transition: theme.transitions.create(['border-color', 'background-color', 'box-shadow']),
     '&:focus': {
       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
@@ -45,5 +45,17 @@ export const StyledInputAdornment = styled(InputAdornment)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  color: theme.palette.secondary.darker,
+}));
+
+export const StyledEndAdornment = styled(InputAdornment)(({ theme }) => ({
+  position: 'absolute',
+  zIndex: 1,
+  height: '2rem',
+  width: '2.5rem',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  right: 0,
   color: theme.palette.secondary.darker,
 }));
