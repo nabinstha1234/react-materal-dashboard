@@ -16,6 +16,7 @@ import {
   ListItemAvatar,
   ListItemButton,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 import { Scrollbar } from 'components/molecules';
 import { ReactIcon } from 'components/molecules';
@@ -70,6 +71,7 @@ const NOTIFICATIONS = [
 
 const NotificationsPopover = () => {
   const [notifications, setNotifications] = useState(NOTIFICATIONS);
+  const theme = useTheme();
 
   const totalUnRead = notifications.filter((item) => item.isUnRead === true).length;
 
@@ -95,12 +97,12 @@ const NotificationsPopover = () => {
   return (
     <>
       <IconButton
-        color={open ? 'primary' : 'default'}
+        color={open ? theme.palette.primary.main : 'default'}
         onClick={handleOpen}
         sx={{ width: 40, height: 40 }}
       >
-        <Badge badgeContent={totalUnRead} color="error">
-          <ReactIcon icon="eva:bell-fill" />
+        <Badge badgeContent={totalUnRead} color="primary">
+          <ReactIcon icon="mdi:bell-outline" />
         </Badge>
       </IconButton>
 
@@ -115,51 +117,48 @@ const NotificationsPopover = () => {
             mt: 1.5,
             ml: 0.75,
             width: 360,
+            borderRadius: 2,
           },
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', py: 2, px: 2.5 }}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="subtitle1">Notifications</Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              You have {totalUnRead} unread messages
-            </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              paddingRight: 2,
+            }}
+          >
+            Notifications
+          </Typography>
+          <Box sx={{ display: 'flex' }}>
+            <Badge
+              badgeContent={totalUnRead}
+              sx={{
+                marginTop: 0,
+              }}
+              color="primary"
+            ></Badge>
           </Box>
-
-          {totalUnRead > 0 && (
-            <Tooltip title=" Mark all as read">
-              <IconButton color="primary" onClick={handleMarkAllAsRead}>
-                <ReactIcon icon="eva:done-all-fill" />
-              </IconButton>
-            </Tooltip>
-          )}
+          <Button
+            type="button"
+            variant="contained"
+            sx={{
+              marginLeft: 'auto',
+              fontSize: 14,
+              fontWeight: 400,
+            }}
+          >
+            See All
+          </Button>
         </Box>
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <Scrollbar sx={{ height: { xs: 340, sm: 'auto' } }}>
-          <List
-            disablePadding
-            subheader={
-              <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
-                New
-              </ListSubheader>
-            }
-          >
+        <Scrollbar
+          sx={{ height: { xs: 340, sm: 'auto', backgroundColor: theme.palette.primary.lighter } }}
+        >
+          <List>
             {notifications.slice(0, 2).map((notification) => (
-              <NotificationItem key={notification.id} notification={notification} />
-            ))}
-          </List>
-
-          <List
-            disablePadding
-            subheader={
-              <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
-                Before that
-              </ListSubheader>
-            }
-          >
-            {notifications.slice(2, 5).map((notification) => (
               <NotificationItem key={notification.id} notification={notification} />
             ))}
           </List>
@@ -197,9 +196,11 @@ function NotificationItem({ notification }) {
   return (
     <ListItemButton
       sx={{
-        py: 1.5,
-        px: 2.5,
-        mt: '1px',
+        py: 1,
+        px: 2,
+        my: '5px',
+        borderRadius: '10px',
+        mx: '10px',
         ...(notification.isUnRead && {
           bgcolor: 'action.selected',
         }),
@@ -219,9 +220,7 @@ function NotificationItem({ notification }) {
               alignItems: 'center',
               color: 'text.disabled',
             }}
-          >
-            <ReactIcon icon="eva:clock-outline" sx={{ mr: 0.5, width: 16, height: 16 }} />
-          </Typography>
+          ></Typography>
         }
       />
     </ListItemButton>
