@@ -2,19 +2,33 @@ import React from 'react';
 
 import { FormControl } from '@mui/material';
 
-import { BootstrapInput, StyledInputLabel, StyledInputAdornment } from './styles';
+import {
+  BootstrapInput,
+  StyledInputLabel,
+  StyledInputAdornment,
+  StyledEndAdornment,
+} from './styles';
 
 const TextField = (props) => {
-  const { startAdornment, ...rest } = props;
+  const { startAdornment, endAdornment, ...rest } = props;
   return (
     <FormControl variant="standard">
-      <StyledInputLabel shrink htmlFor="bootstrap-input">
-        {props.label}
-      </StyledInputLabel>
+      {props.label ? (
+        <StyledInputLabel shrink htmlFor="bootstrap-input">
+          {props.label}
+        </StyledInputLabel>
+      ) : undefined}
       <BootstrapInput
         {...rest}
         startAdornment={
-          <StyledInputAdornment position="start">{startAdornment}</StyledInputAdornment>
+          startAdornment ? (
+            <StyledInputAdornment position="start">{startAdornment}</StyledInputAdornment>
+          ) : undefined
+        }
+        endAdornment={
+          endAdornment ? (
+            <StyledEndAdornment position="end">{endAdornment}</StyledEndAdornment>
+          ) : undefined
         }
       />
     </FormControl>

@@ -6,10 +6,10 @@ import { BaseRoute, ProtectedRoute, PublicRoute } from 'components/organisms';
 import config from 'config';
 
 const {
-  roles: { Admin, SuperAdmin, Employee, HR },
+  roles: { Admin, Manager, Employee, HR },
 } = config;
 
-const allRoles = [Employee, SuperAdmin, Admin, HR];
+const allRoles = [Employee, Manager, Admin, HR];
 
 export const Routes = () => {
   return (

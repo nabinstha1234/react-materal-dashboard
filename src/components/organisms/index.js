@@ -9,3 +9,4 @@ export * from './DashboardSidebar';
 export * from './NavSection';
 export * from './AccountPopover';
 export * from './NotificationPopover';
+export * from './SearchBar';

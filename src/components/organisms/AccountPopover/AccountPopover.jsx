@@ -89,7 +89,7 @@ const AccountPopover = () => {
             p: 0,
             mt: 1.5,
             ml: 0.75,
-            width: 190,
+            width: 210,
             '& .MuiMenuItem-root': {
               typography: 'body2',
               borderRadius: 0.75,
