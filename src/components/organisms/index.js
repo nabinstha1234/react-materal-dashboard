@@ -12,3 +12,4 @@ export * from './NotificationPopover';
 export * from './SearchBar';
 export * from './ReactModal';
 export * from './ViewProfileForm';
+export * from './ChangePasswordForm';
