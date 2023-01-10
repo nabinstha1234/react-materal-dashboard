@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 
 import { ReactIcon } from 'components/molecules';
-import { ViewProfileForm, ReactModal } from 'components/organisms';
+import { ViewProfileForm, ReactModal, ChangePasswordForm } from 'components/organisms';
 import { removeToken } from 'utils/token';
 import config from 'config';
 
@@ -39,6 +39,7 @@ const MENU_OPTIONS = [
 const AccountPopover = () => {
   const [open, setOpen] = useState(null);
   const [openProfileModal, setOpenProfileModal] = useState(false);
+  const [openChangePasswordModal, setOpenChangePasswordModal] = useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
 
@@ -53,7 +54,7 @@ const AccountPopover = () => {
       setOpenProfileModal(true);
     }
     if (value === MENU_OPTIONS_CONST.changePassword) {
-      navigate('/change-password');
+      setOpenChangePasswordModal(true);
     }
     setOpen(null);
   };
@@ -161,21 +162,47 @@ const AccountPopover = () => {
       </Popover>
       <ReactModal
         fullWidth
-        maxWidth="lg"
-        open={openProfileModal}
+        maxWidth={openChangePasswordModal ? 'md' : 'lg'}
+        open={openProfileModal || openChangePasswordModal}
         title={
-          <Stack>
-            <Typography sx={{ ...theme.typography.h2, color: theme.palette.primary.darker }}>
-              Profile
-            </Typography>
-            <Typography sx={{ ...theme.typography.subtitle1, color: theme.palette.error.light }}>
-              Note: To do any changes please contact admin
-            </Typography>
-          </Stack>
+          openChangePasswordModal ? (
+            <Stack>
+              <Typography sx={{ ...theme.typography.h2, color: theme.palette.primary.darker }}>
+                Change Password
+              </Typography>
+              <Typography sx={{ ...theme.typography.subtitle1, color: theme.palette.error.light }}>
+                New passwords must meet the rules of the password policy.
+              </Typography>
+              <Typography sx={{ ...theme.typography.subtitle1, color: 'secondary.dark' }}>
+                (One Number, One Special Character (from &*#$ only), No Space, At least 8
+                characters)
+              </Typography>
+            </Stack>
+          ) : (
+            <Stack>
+              <Typography sx={{ ...theme.typography.h2, color: theme.palette.primary.darker }}>
+                Profile
+              </Typography>
+              <Typography sx={{ ...theme.typography.subtitle1, color: theme.palette.error.light }}>
+                Note: To do any changes please contact admin
+              </Typography>
+            </Stack>
+          )
         }
-        handleClose={() => setOpenProfileModal(false)}
+        handleClose={() => {
+          setOpenProfileModal(false);
+          setOpenChangePasswordModal(false);
+        }}
       >
-        <ViewProfileForm />
+        {openChangePasswordModal ? (
+          <ChangePasswordForm
+            handleCloseModal={() => {
+              setOpenChangePasswordModal(false);
+            }}
+          />
+        ) : (
+          <ViewProfileForm />
+        )}
       </ReactModal>
     </>
   );
