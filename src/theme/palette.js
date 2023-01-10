@@ -26,7 +26,7 @@ const PRIMARY = {
 };
 
 const SECONDARY = {
-  lighter: '#D6E4FF',
+  lighter: '#DCDCDC',
   light: '#848D96',
   main: '#F4F8FB',
   dark: '#1939B7',
@@ -63,7 +63,7 @@ const WARNING = {
 
 const ERROR = {
   lighter: '#FFE7D9',
-  light: '#FFA48D',
+  light: '#F75B4F',
   main: '#FF4842',
   dark: '#B72136',
   darker: '#7A0C2E',
