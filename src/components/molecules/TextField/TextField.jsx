@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { FormControl } from '@mui/material';
+import { ReactIcon } from 'components/molecules';
 
 import {
   BootstrapInput,
@@ -10,12 +11,22 @@ import {
 } from './styles';
 
 const TextField = (props) => {
-  const { startAdornment, endAdornment, ...rest } = props;
+  const { startAdornment, lock, endAdornment, ...rest } = props;
   return (
     <FormControl variant="standard">
       {props.label ? (
         <StyledInputLabel shrink htmlFor="bootstrap-input">
-          {props.label}
+          {props.label}{' '}
+          {lock ? (
+            <ReactIcon
+              sx={{
+                color: 'secondary.lighter',
+              }}
+              icon="material-symbols:lock-outline"
+              width={20}
+              height={18}
+            />
+          ) : null}
         </StyledInputLabel>
       ) : undefined}
       <BootstrapInput

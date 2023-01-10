@@ -17,6 +17,8 @@ export const BootstrapInput = styled(InputBase)(({ theme }) => ({
     fontWeight: 500,
     lineHeight: '19.5px',
     color: theme.palette.primary.dark,
+    display: 'flex',
+    alignItems: 'center',
   },
   '& .MuiInputBase-input': {
     width: '100%',

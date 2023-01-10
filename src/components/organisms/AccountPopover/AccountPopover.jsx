@@ -14,15 +14,23 @@ import {
 } from '@mui/material';
 
 import { ReactIcon } from 'components/molecules';
+import { ViewProfileForm, ReactModal } from 'components/organisms';
 import { removeToken } from 'utils/token';
 import config from 'config';
 
+const MENU_OPTIONS_CONST = {
+  profile: 'profile',
+  changePassword: 'changePassword',
+};
+
 const MENU_OPTIONS = [
   {
+    value: MENU_OPTIONS_CONST.profile,
     label: 'View Profile',
     icon: 'material-symbols:person-outline',
   },
   {
+    value: MENU_OPTIONS_CONST.changePassword,
     label: 'Change Password',
     icon: 'material-symbols:lock-outline',
   },
@@ -30,6 +38,7 @@ const MENU_OPTIONS = [
 
 const AccountPopover = () => {
   const [open, setOpen] = useState(null);
+  const [openProfileModal, setOpenProfileModal] = useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
 
@@ -39,7 +48,13 @@ const AccountPopover = () => {
     setOpen(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClick = (value) => {
+    if (value === MENU_OPTIONS_CONST.profile) {
+      setOpenProfileModal(true);
+    }
+    if (value === MENU_OPTIONS_CONST.changePassword) {
+      navigate('/change-password');
+    }
     setOpen(null);
   };
 
@@ -50,7 +65,7 @@ const AccountPopover = () => {
     removeToken({
       name: config.refreshTokenName,
     });
-    handleClose();
+    setOpen(null);
     navigate('/login');
   };
 
@@ -81,7 +96,7 @@ const AccountPopover = () => {
       <Popover
         open={Boolean(open)}
         anchorEl={open}
-        onClose={handleClose}
+        onClose={() => setOpen(null)}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         PaperProps={{
@@ -115,7 +130,7 @@ const AccountPopover = () => {
               sx={{
                 color: theme.palette.primary.darker,
               }}
-              onClick={handleClose}
+              onClick={() => handleClick(option.value)}
             >
               <ReactIcon
                 icon={option.icon}
@@ -144,6 +159,24 @@ const AccountPopover = () => {
           &nbsp; Logout
         </MenuItem>
       </Popover>
+      <ReactModal
+        fullWidth
+        maxWidth="lg"
+        open={openProfileModal}
+        title={
+          <Stack>
+            <Typography sx={{ ...theme.typography.h2, color: theme.palette.primary.darker }}>
+              Profile
+            </Typography>
+            <Typography sx={{ ...theme.typography.subtitle1, color: theme.palette.error.light }}>
+              Note: To do any changes please contact admin
+            </Typography>
+          </Stack>
+        }
+        handleClose={() => setOpenProfileModal(false)}
+      >
+        <ViewProfileForm />
+      </ReactModal>
     </>
   );
 };
