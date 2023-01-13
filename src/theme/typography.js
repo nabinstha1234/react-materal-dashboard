@@ -24,7 +24,8 @@ export function responsiveFontSizes({ sm, md, lg }) {
 
 // ----------------------------------------------------------------------
 
-const FONT_PRIMARY = 'Montserrat ,Public Sans, sans-serif'; // Google Font
+//const FONT_PRIMARY = 'Montserrat ,Public Sans, sans-serif'; // Google Font
+const FONT_PRIMARY = 'Montserrat, sans-serif'; // Google Font
 // const FONT_SECONDARY = 'CircularStd, sans-serif'; // Local Font
 
 const typography = {
@@ -39,10 +40,10 @@ const typography = {
     ...responsiveFontSizes({ sm: 52, md: 58, lg: 64 }),
   },
   h2: {
-    fontWeight: 800,
+    fontWeight: 700,
     lineHeight: 64 / 48,
     fontSize: pxToRem(32),
-    ...responsiveFontSizes({ sm: 40, md: 44, lg: 48 }),
+    ...responsiveFontSizes({ sm: 24, md: 28, lg: 32 }),
   },
   h3: {
     fontWeight: 700,
@@ -69,12 +70,12 @@ const typography = {
     ...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
   },
   subtitle1: {
-    fontWeight: 600,
+    fontWeight: 500,
     lineHeight: 1.5,
     fontSize: pxToRem(16),
   },
   subtitle2: {
-    fontWeight: 600,
+    fontWeight: 500,
     lineHeight: 22 / 14,
     fontSize: pxToRem(14),
   },

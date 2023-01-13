@@ -14,15 +14,23 @@ import {
 } from '@mui/material';
 
 import { ReactIcon } from 'components/molecules';
+import { ViewProfileForm, ReactModal, ChangePasswordForm } from 'components/organisms';
 import { removeToken } from 'utils/token';
 import config from 'config';
 
+const MENU_OPTIONS_CONST = {
+  profile: 'profile',
+  changePassword: 'changePassword',
+};
+
 const MENU_OPTIONS = [
   {
+    value: MENU_OPTIONS_CONST.profile,
     label: 'View Profile',
     icon: 'material-symbols:person-outline',
   },
   {
+    value: MENU_OPTIONS_CONST.changePassword,
     label: 'Change Password',
     icon: 'material-symbols:lock-outline',
   },
@@ -30,6 +38,8 @@ const MENU_OPTIONS = [
 
 const AccountPopover = () => {
   const [open, setOpen] = useState(null);
+  const [openProfileModal, setOpenProfileModal] = useState(false);
+  const [openChangePasswordModal, setOpenChangePasswordModal] = useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
 
@@ -39,7 +49,13 @@ const AccountPopover = () => {
     setOpen(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClick = (value) => {
+    if (value === MENU_OPTIONS_CONST.profile) {
+      setOpenProfileModal(true);
+    }
+    if (value === MENU_OPTIONS_CONST.changePassword) {
+      setOpenChangePasswordModal(true);
+    }
     setOpen(null);
   };
 
@@ -50,7 +66,7 @@ const AccountPopover = () => {
     removeToken({
       name: config.refreshTokenName,
     });
-    handleClose();
+    setOpen(null);
     navigate('/login');
   };
 
@@ -81,7 +97,7 @@ const AccountPopover = () => {
       <Popover
         open={Boolean(open)}
         anchorEl={open}
-        onClose={handleClose}
+        onClose={() => setOpen(null)}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         PaperProps={{
@@ -89,7 +105,7 @@ const AccountPopover = () => {
             p: 0,
             mt: 1.5,
             ml: 0.75,
-            width: 190,
+            width: 210,
             '& .MuiMenuItem-root': {
               typography: 'body2',
               borderRadius: 0.75,
@@ -115,7 +131,7 @@ const AccountPopover = () => {
               sx={{
                 color: theme.palette.primary.darker,
               }}
-              onClick={handleClose}
+              onClick={() => handleClick(option.value)}
             >
               <ReactIcon
                 icon={option.icon}
@@ -144,6 +160,50 @@ const AccountPopover = () => {
           &nbsp; Logout
         </MenuItem>
       </Popover>
+      <ReactModal
+        fullWidth
+        maxWidth={openChangePasswordModal ? 'md' : 'lg'}
+        open={openProfileModal || openChangePasswordModal}
+        title={
+          openChangePasswordModal ? (
+            <Stack>
+              <Typography sx={{ ...theme.typography.h2, color: theme.palette.primary.darker }}>
+                Change Password
+              </Typography>
+              <Typography sx={{ ...theme.typography.subtitle1, color: theme.palette.error.light }}>
+                New passwords must meet the rules of the password policy.
+              </Typography>
+              <Typography sx={{ ...theme.typography.subtitle1, color: 'secondary.dark' }}>
+                (One Number, One Special Character (from &*#$ only), No Space, At least 8
+                characters)
+              </Typography>
+            </Stack>
+          ) : (
+            <Stack>
+              <Typography sx={{ ...theme.typography.h2, color: theme.palette.primary.darker }}>
+                Profile
+              </Typography>
+              <Typography sx={{ ...theme.typography.subtitle1, color: theme.palette.error.light }}>
+                Note: To do any changes please contact admin
+              </Typography>
+            </Stack>
+          )
+        }
+        handleClose={() => {
+          setOpenProfileModal(false);
+          setOpenChangePasswordModal(false);
+        }}
+      >
+        {openChangePasswordModal ? (
+          <ChangePasswordForm
+            handleCloseModal={() => {
+              setOpenChangePasswordModal(false);
+            }}
+          />
+        ) : (
+          <ViewProfileForm />
+        )}
+      </ReactModal>
     </>
   );
 };

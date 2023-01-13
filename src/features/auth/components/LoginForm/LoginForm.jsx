@@ -1,21 +1,14 @@
 import { useState } from 'react';
 import * as Yup from 'yup';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useForm, Controller, useWatch } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import {
-  Link,
-  Stack,
-  Checkbox,
-  TextField,
-  IconButton,
-  InputAdornment,
-  FormControlLabel,
-} from '@mui/material';
+import { Stack, IconButton, InputAdornment, Button, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
-import { ReactIcon } from 'components/molecules';
+import { ReactIcon, TextField } from 'components/molecules';
 import AuthService from 'features/auth/Api/authService';
 import { login } from 'features/auth/slice/AuthSlice';
 import { setToken } from 'utils/token';
@@ -30,6 +23,7 @@ const LoginSchema = Yup.object().shape({
 export const LoginForm = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,11 +37,6 @@ export const LoginForm = (props) => {
     mode: 'onChange',
     shouldFocusError: true,
     resolver: yupResolver(LoginSchema),
-  });
-
-  const isCheckedRememberMe = useWatch({
-    control,
-    name: 'rememberMe',
   });
 
   const handleShowPassword = () => {
@@ -90,7 +79,9 @@ export const LoginForm = (props) => {
                 autoComplete="username"
                 type="email"
                 label="Email address"
+                placeholder="Enter your email"
                 onChange={onChange}
+                startAdornment={<ReactIcon width={20} icon="ic:outline-email" />}
                 value={value}
                 error={Boolean(error?.message)}
                 helperText={error?.message}
@@ -98,7 +89,6 @@ export const LoginForm = (props) => {
             );
           }}
         />
-
         <Controller
           control={control}
           name="password"
@@ -107,44 +97,55 @@ export const LoginForm = (props) => {
               autoComplete="current-password"
               onChange={onChange}
               value={value}
+              placeholder="Enter your password"
               type={showPassword ? 'text' : 'password'}
               label="Password"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handleShowPassword} edge="end">
-                      <ReactIcon icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
+              startAdornment={<ReactIcon width={20} icon="eva:lock-outline" />}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton onClick={handleShowPassword} edge="end">
+                    <ReactIcon icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                  </IconButton>
+                </InputAdornment>
+              }
               error={Boolean(error?.message)}
               helperText={error?.message}
             />
           )}
         />
+        <Button
+          size="large"
+          fullWidth
+          type="submit"
+          variant="contained"
+          sx={{ marginTop: 5 }}
+          loading={isSubmitting.toString()}
+        >
+          Log In
+        </Button>
       </Stack>
 
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-        <Controller
-          control={control}
-          name="rememberMe"
-          render={({ field }) => (
-            <FormControlLabel
-              control={<Checkbox {...field} checked={isCheckedRememberMe} />}
-              label="Remember me"
-            />
-          )}
-        />
-
-        <Link component={RouterLink} variant="subtitle2" to="#" underline="hover">
+      <Stack
+        direction="column"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ my: 2, fontSize: theme.typography.subtitle1, fontWeight: 400 }}
+      >
+        <Typography
+          sx={{
+            color: theme.palette.primary.darker,
+          }}
+        >
           Forgot password?
-        </Link>
+        </Typography>
+        <Typography
+          sx={{
+            color: theme.palette.text.secondary,
+          }}
+        >
+          Contact your admin to get password
+        </Typography>
       </Stack>
-
-      <IconButton size="large" type="submit" variant="contained" loading={isSubmitting.toString()}>
-        Login
-      </IconButton>
     </form>
   );
 };

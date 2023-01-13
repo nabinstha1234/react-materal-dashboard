@@ -1,36 +1,57 @@
-import { Link as RouterLink } from 'react-router-dom';
-import { Stack, Link, Container, Typography } from '@mui/material';
+import { Stack, Link, Box, Container, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
+import { useResponsive } from 'hooks';
+import loginIllustration from 'assets/images/svg/login-illustration.svg';
 import { LoginForm } from '../../components';
 
-import { ContentStyle, RootStyle } from './styles';
+import { ContentStyle, RootStyle, StyledSection, ContentWrapper } from './styles';
 
 const Login = (props) => {
+  const mdUp = useResponsive('up', 'md');
+  const theme = useTheme();
   return (
     <RootStyle title="Login">
-      <Container maxWidth="sm">
-        <ContentStyle>
-          <Stack sx={{ mb: 5 }}>
-            <Typography variant="h4" gutterBottom>
-              Sign in to Monnit
-            </Typography>
-            <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
-          </Stack>
-          <LoginForm />
-          <Typography
-            variant="body2"
-            align="center"
+      {mdUp && (
+        <StyledSection>
+          <Box
+            component="img"
+            sx={{ marginTop: 10, width: '70%' }}
+            src={loginIllustration}
+            alt="login"
+          />
+        </StyledSection>
+      )}
+      <Container
+        sx={{
+          backgroundColor: theme.palette.common.white,
+        }}
+        maxWidth="lg"
+        disableGutters
+      >
+        <ContentWrapper>
+          <Stack
             sx={{
-              mt: 3,
-              display: { sm: 'none' },
+              py: 2,
+              borderBottom: 2,
+              borderColor: theme.palette.primary.lighter,
+              textAlign: 'center',
             }}
           >
-            Don’t have an account?&nbsp;
-            <Link variant="subtitle2" component={RouterLink} to="register" underline="hover">
-              Get started
-            </Link>
-          </Typography>
-        </ContentStyle>
+            <Typography
+              variant="h3"
+              sx={{
+                color: theme.palette.primary.dark,
+              }}
+              gutterBottom
+            >
+              Log In
+            </Typography>
+          </Stack>
+          <ContentStyle>
+            <LoginForm />
+          </ContentStyle>
+        </ContentWrapper>
       </Container>
     </RootStyle>
   );

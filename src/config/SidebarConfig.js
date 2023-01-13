@@ -4,10 +4,10 @@ import config from 'config';
 const getIcon = (name) => <ReactIcon icon={name} width={30} height={30} />;
 
 const {
-  roles: { Admin, SuperAdmin, Employee, HR },
+  roles: { Admin, Manager, Employee, HR },
 } = config;
 
-const allRole = [SuperAdmin, Admin, Employee, HR];
+const allRole = [Manager, Admin, Employee, HR];
 
 const sidebarConfig = [
   {

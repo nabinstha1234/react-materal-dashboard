@@ -9,3 +9,7 @@ export * from './DashboardSidebar';
 export * from './NavSection';
 export * from './AccountPopover';
 export * from './NotificationPopover';
+export * from './SearchBar';
+export * from './ReactModal';
+export * from './ViewProfileForm';
+export * from './ChangePasswordForm';

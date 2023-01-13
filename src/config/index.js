@@ -3,10 +3,10 @@ const config = {
   tokenName: 'token',
   refreshTokenName: 'refresh',
   roles: {
-    SuperAdmin: 'SuperAdmin',
     Admin: 'Admin',
     HR: 'HR',
-    Employee: 'GeneralAdmin',
+    Employee: 'Employee',
+    Manager: 'Manager',
   },
   paging: {
     perPage: 25,
