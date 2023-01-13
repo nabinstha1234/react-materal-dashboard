@@ -98,15 +98,19 @@ const Row = memo(({ row, index, onApprove, onOpen }) => {
                 height: '48px',
                 width: '48px',
               }}
-              alt={row.name}
-              src={row.avatar}
+              alt={row.username}
+              src={row.avtar}
             />
           </ListItemAvatar>
           <Box>
-            <ListItemText sx={styles.avatarName} primary={row.name} className="align-self-center" />
+            <ListItemText
+              sx={styles.avatarName}
+              primary={row.username}
+              className="align-self-center"
+            />
             <Box>
               <Typography sx={styles.avatarSubHead} component="p" color="text.primary">
-                {row.designation}
+                {row.userId.designation}
               </Typography>
             </Box>
           </Box>
@@ -133,7 +137,7 @@ const Row = memo(({ row, index, onApprove, onOpen }) => {
               />
             )}
             <p className="m-0">
-              {row.document ? String(row.document).substring(0, 9) + '..' : 'N/A'}
+              {row.document ? String(row.document).split('/').pop().substring(0, 9) + '..' : 'N/A'}
             </p>
           </div>
           {row.document !== '' && (
@@ -195,7 +199,7 @@ const Row = memo(({ row, index, onApprove, onOpen }) => {
                 <>
                   <div className="col-6 d-flex justify-content-center">
                     <Chip
-                      onClick={(e) => onApprove(e, row.userId)}
+                      onClick={(e) => onApprove(e, row.userId._id)}
                       sx={[
                         styles.chip,
                         {
@@ -287,7 +291,7 @@ const DataTable = ({ tabIndex }) => {
     e.preventDefault();
     setLoader(true);
     let data = {
-      userId: userId || selectedItem.userId,
+      userId: userId || selectedItem.userId._id,
       approve,
     };
     if (rejectReason && approve === 'false') data.rejectReason = rejectReason;
