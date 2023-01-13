@@ -22,31 +22,25 @@ export const Routes = () => {
         {
           path: routes.masterPage.path,
           element: (
-            <ProtectedRoute roles={[SuperAdmin, Admin, HR]}>
-              {routes.masterPage.component}
-            </ProtectedRoute>
+            <ProtectedRoute roles={[Admin, HR]}>{routes.masterPage.component}</ProtectedRoute>
           ),
         },
         {
           path: routes.dailyReport.path,
           element: (
-            <ProtectedRoute roles={[SuperAdmin, Admin, HR]}>
-              {routes.dailyReport.component}
-            </ProtectedRoute>
+            <ProtectedRoute roles={[Admin, HR]}>{routes.dailyReport.component}</ProtectedRoute>
           ),
         },
         {
           path: routes.leaveManagement.path,
           element: (
-            <ProtectedRoute roles={[SuperAdmin, Admin, HR]}>
-              {routes.leaveManagement.component}
-            </ProtectedRoute>
+            <ProtectedRoute roles={[Admin, HR]}>{routes.leaveManagement.component}</ProtectedRoute>
           ),
         },
         {
           path: routes.employeeManagement.path,
           element: (
-            <ProtectedRoute roles={[SuperAdmin, Admin, HR]}>
+            <ProtectedRoute roles={[Admin, HR]}>
               {routes.employeeManagement.component}
             </ProtectedRoute>
           ),
@@ -54,18 +48,12 @@ export const Routes = () => {
         {
           path: routes.addEmployee.path,
           element: (
-            <ProtectedRoute roles={[SuperAdmin, Admin, HR]}>
-              {routes.addEmployee.component}
-            </ProtectedRoute>
+            <ProtectedRoute roles={[Admin, HR]}>{routes.addEmployee.component}</ProtectedRoute>
           ),
         },
         {
           path: routes.employee.path,
-          element: (
-            <ProtectedRoute roles={[SuperAdmin, Admin, HR]}>
-              {routes.employee.component}
-            </ProtectedRoute>
-          ),
+          element: <ProtectedRoute roles={[Admin, HR]}>{routes.employee.component}</ProtectedRoute>,
         },
         {
           path: routes.login.path,
