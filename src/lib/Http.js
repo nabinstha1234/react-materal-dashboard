@@ -30,10 +30,8 @@ export default class Http {
       headers: {
         ...config.headers,
         ...this.getHeaders(),
-        ...this.headers,
       },
     };
-
     return config;
   };
 
@@ -41,14 +39,14 @@ export default class Http {
     return response.data;
   };
 
-  handleError = (err) => {
+  handleError = async (err) => {
     if (err.response) {
       const { status, data, headers } = err.response;
-      if (status === 401) {
+      if (status === 404 && String(data.error).trim() === "Not authorized") {
         // Refresh token and retry original request
         return this.refreshToken()
           .then((newToken) => {
-            this.headers['Authorization'] = `Token ${newToken}`;
+            this.headers['Authorization'] = `Bearer ${newToken}`;
             // Retry original request with new token
             return this.instance(err.config);
           })
@@ -73,7 +71,7 @@ export default class Http {
     }
   };
 
-  refreshToken() {
+  async refreshToken() {
     const refreshToken = getToken({ name: config.refreshTokenName });
     if (!refreshToken) {
       throw new Error('No refresh token found');
@@ -103,7 +101,7 @@ export default class Http {
     };
 
     if (token) {
-      headers['Authorization'] = `Token ${token}`;
+      headers['Authorization'] = `Bearer ${token}`;
     }
 
     return headers;

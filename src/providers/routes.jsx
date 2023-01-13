@@ -20,6 +20,54 @@ export const Routes = () => {
           element: <ProtectedRoute roles={allRoles}>{routes.home.component}</ProtectedRoute>,
         },
         {
+          path: routes.masterPage.path,
+          element: (
+            <ProtectedRoute roles={[SuperAdmin, Admin, HR]}>
+              {routes.masterPage.component}
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: routes.dailyReport.path,
+          element: (
+            <ProtectedRoute roles={[SuperAdmin, Admin, HR]}>
+              {routes.dailyReport.component}
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: routes.leaveManagement.path,
+          element: (
+            <ProtectedRoute roles={[SuperAdmin, Admin, HR]}>
+              {routes.leaveManagement.component}
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: routes.employeeManagement.path,
+          element: (
+            <ProtectedRoute roles={[SuperAdmin, Admin, HR]}>
+              {routes.employeeManagement.component}
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: routes.addEmployee.path,
+          element: (
+            <ProtectedRoute roles={[SuperAdmin, Admin, HR]}>
+              {routes.addEmployee.component}
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: routes.employee.path,
+          element: (
+            <ProtectedRoute roles={[SuperAdmin, Admin, HR]}>
+              {routes.employee.component}
+            </ProtectedRoute>
+          ),
+        },
+        {
           path: routes.login.path,
           element: <PublicRoute>{routes.login.component}</PublicRoute>,
         },
