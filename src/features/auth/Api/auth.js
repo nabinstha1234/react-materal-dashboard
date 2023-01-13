@@ -25,3 +25,8 @@ export const acceptToken = createAsyncThunk('auth/accept-token', async (args) =>
   const response = await AuthService.acceptToken(args);
   return response;
 });
+
+export const getCurrentEmployeeInfo = createAsyncThunk('auth/employee-info', async (args) => {
+  const response = await AuthService.getEmployeeInfo(args);
+  return response;
+});

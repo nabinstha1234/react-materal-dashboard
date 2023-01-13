@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FormControl } from '@mui/material';
+import { FormControl, FormHelperText } from '@mui/material';
 import { ReactIcon } from 'components/molecules';
 
 import {
@@ -11,9 +11,9 @@ import {
 } from './styles';
 
 const TextField = (props) => {
-  const { startAdornment, lock, endAdornment, ...rest } = props;
+  const { startAdornment, lock, endAdornment, error, helperText, ...rest } = props;
   return (
-    <FormControl variant="standard">
+    <FormControl error variant="standard">
       {props.label ? (
         <StyledInputLabel shrink htmlFor="bootstrap-input">
           {props.label}{' '}
@@ -31,6 +31,7 @@ const TextField = (props) => {
       ) : undefined}
       <BootstrapInput
         {...rest}
+        error={error}
         startAdornment={
           startAdornment ? (
             <StyledInputAdornment position="start">{startAdornment}</StyledInputAdornment>
@@ -42,6 +43,7 @@ const TextField = (props) => {
           ) : undefined
         }
       />
+      {error && helperText ? <FormHelperText>{helperText}</FormHelperText> : undefined}
     </FormControl>
   );
 };

@@ -23,8 +23,16 @@ export default class AuthService {
   }
 
   static changePassword(args) {
-    return http.put({
-      endpoint: '/users/change-password',
+    console.log(http, 'i am http');
+    return http.post({
+      endpoint: '/change-password',
+      payload: args,
+    });
+  }
+
+  static getEmployeeInfo(args) {
+    return http.post({
+      endpoint: '/admin/employee-info',
       payload: args,
     });
   }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import config from 'config';
+import projectConfig from 'config';
 import routes from 'config/routes';
 import { getToken, removeToken, setToken } from 'utils/token';
 
@@ -8,7 +8,7 @@ export default class Http {
   instance;
   headers;
 
-  constructor(baseUrl = config.apiUrl) {
+  constructor(baseUrl = projectConfig.apiUrl) {
     this.headers = this.getHeaders();
 
     this.instance = axios.create({
@@ -48,12 +48,12 @@ export default class Http {
         // Refresh token and retry original request
         return this.refreshToken()
           .then((newToken) => {
-            this.headers['Authorization'] = `Token ${newToken}`;
+            this.headers['Authorization'] = `Bearer ${newToken}`;
             // Retry original request with new token
             return this.instance(err.config);
           })
           .catch((error) => {
-            removeToken({ name: config.tokenName });
+            removeToken({ name: projectConfig.tokenName });
             window.location.href = routes.login.path;
             return Promise.reject(error);
           });
@@ -74,7 +74,7 @@ export default class Http {
   };
 
   refreshToken() {
-    const refreshToken = getToken({ name: config.refreshTokenName });
+    const refreshToken = getToken({ name: projectConfig.refreshTokenName });
     if (!refreshToken) {
       throw new Error('No refresh token found');
     }
@@ -87,7 +87,7 @@ export default class Http {
       .post('/refresh-token', payload)
       .then((response) => {
         const { accessToken } = response.data;
-        setToken({ name: config.tokenName, value: accessToken });
+        setToken({ name: projectConfig.tokenName, value: accessToken });
         return accessToken;
       })
       .catch((error) => {
@@ -97,20 +97,19 @@ export default class Http {
 
   getHeaders = () => {
     const token = this.token();
-
     const headers = {
       'content-type': 'application/json',
     };
 
     if (token) {
-      headers['Authorization'] = `Token ${token}`;
+      headers['Authorization'] = `Bearer ${token}`;
     }
 
     return headers;
   };
 
   token = () => {
-    return getToken({ name: config.tokenName });
+    return getToken({ name: projectConfig.tokenName });
   };
 
   changeHeaders = (headerConfig) => {

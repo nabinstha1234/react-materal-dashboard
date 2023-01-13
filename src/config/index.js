@@ -2,6 +2,7 @@ const config = {
   apiUrl: process.env.REACT_APP_API_URL,
   tokenName: 'token',
   refreshTokenName: 'refresh',
+  currentUser: 'currentUser',
   roles: {
     Admin: 'Admin',
     HR: 'HR',

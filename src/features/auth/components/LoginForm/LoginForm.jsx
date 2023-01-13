@@ -56,6 +56,7 @@ export const LoginForm = (props) => {
         if (response) {
           setToken({ name: config.tokenName, value: response.accessToken });
           setToken({ name: config.refreshTokenName, value: response.refreshToken });
+          setToken({ name: config.currentUser, value: response.user });
           dispatch(login(response?.user));
           navigate(routes.home.path);
         }
