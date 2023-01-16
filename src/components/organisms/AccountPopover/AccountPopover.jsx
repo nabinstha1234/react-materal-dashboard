@@ -17,6 +17,7 @@ import { ReactIcon } from 'components/molecules';
 import { ViewProfileForm, ReactModal, ChangePasswordForm } from 'components/organisms';
 import { removeToken } from 'utils/token';
 import config from 'config';
+import AuthService from 'features/auth/Api/authService';
 
 const MENU_OPTIONS_CONST = {
   profile: 'profile',
@@ -60,6 +61,13 @@ const AccountPopover = () => {
   };
 
   const handleLogout = () => {
+    AuthService.logout()
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((err) => {
+        console.log('logout error', err);
+      });
     removeToken({
       name: config.tokenName,
     });

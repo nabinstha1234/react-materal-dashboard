@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import { Stack, IconButton, InputAdornment, Button, Typography } from '@mui/material';
+import { Stack, IconButton, Button, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 import { ReactIcon, TextField } from 'components/molecules';
@@ -103,11 +103,9 @@ export const LoginForm = (props) => {
               label="Password"
               startAdornment={<ReactIcon width={20} icon="eva:lock-outline" />}
               endAdornment={
-                <InputAdornment position="end">
-                  <IconButton onClick={handleShowPassword} edge="end">
-                    <ReactIcon icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
-                  </IconButton>
-                </InputAdornment>
+                <IconButton onClick={handleShowPassword} edge="start">
+                  <ReactIcon icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                </IconButton>
               }
               error={Boolean(error?.message)}
               helperText={error?.message}

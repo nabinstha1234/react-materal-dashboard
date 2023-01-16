@@ -112,13 +112,6 @@ export default class Http {
     return getToken({ name: projectConfig.tokenName });
   };
 
-  changeHeaders = (headerConfig) => {
-    this.headers = {
-      ...this.headers,
-      ...headerConfig,
-    };
-  };
-
   get(args) {
     return this.instance.get(args.endpoint).then((response) => {
       return response;

@@ -18,12 +18,11 @@ export default class AuthService {
 
   static logout() {
     return http.post({
-      endpoint: '/auth/logout',
+      endpoint: '/logout',
     });
   }
 
   static changePassword(args) {
-    console.log(http, 'i am http');
     return http.post({
       endpoint: '/change-password',
       payload: args,
