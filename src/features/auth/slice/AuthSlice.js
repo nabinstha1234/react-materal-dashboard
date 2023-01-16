@@ -26,8 +26,8 @@ export const authSlice = createSlice({
     });
     builder.addCase(getCurrentUser.fulfilled, (state, action) => {
       state.userResponse = {
-        ...action.payload.data,
-        role: action.payload.data.role.role_name,
+        ...action.payload,
+        role: action.payload.role
       };
       state.loading = false;
       state.error = null;

@@ -52,6 +52,34 @@ const sidebarConfig = [
     fillIcon: getIcon('material-symbols:description'),
     roles: allRole,
   },
+  {
+    title: 'Leave Management',
+    path: '/leave-management',
+    icon: getIcon('material-symbols:edit-calendar'),
+    fillIcon: getIcon('material-symbols:edit-calendar'),
+    roles: [Admin],
+  },
+  {
+    title: 'Employee Management',
+    path: '/employee-management',
+    icon: getIcon('ic:sharp-people-outline'),
+    fillIcon: getIcon('ic:sharp-people-outline'),
+    roles: [Admin],
+  },
+  {
+    title: 'Daily Report',
+    path: '/daily-report',
+    icon: getIcon('material-symbols:bar-chart'),
+    fillIcon: getIcon('material-symbols:bar-chart'),
+    roles: [Admin],
+  },
+  {
+    title: 'Master Page',
+    path: '/master-page',
+    icon: getIcon('ri:user-settings-line'),
+    fillIcon: getIcon('ri:user-settings-line'),
+    roles: [Admin],
+  },
 ];
 
 export default sidebarConfig;

@@ -12,7 +12,7 @@ export default class AuthService {
 
   static getCurrentUser() {
     return http.get({
-      endpoint: '/auth/me',
+      endpoint: '/me',
     });
   }
 

@@ -1,0 +1,68 @@
+.master-page-div {
+  /* margin-left: 119px; */
+}
+
+.css-o4b71y-MuiAccordionSummary-content {
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+.css-12y515k-MuiPaper-root-MuiAccordion-root:before {
+  display: none;
+}
+.types-according-title {
+  font-family: 'Montserrat' !important;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #092e69;
+}
+
+.types-accordian-badge {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  /* identical to box height */
+  color: #ffffff;
+  margin-left: 16px;
+}
+
+.types-sub-list {
+  border-top: 2px solid #f3f5f9;
+}
+
+.types-sub-list-title {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #000f28;
+}
+.types-sub-list-date {
+  justify-content: center;
+  align-items: center;
+  padding: 4px 16px;
+  background: rgba(10, 104, 255, 0.1);
+  border: 0.6px solid #0a68ff;
+  border-radius: 8px;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 8px;
+  border: none;
+}
+.scrollbar::-webkit-scrollbar-track {
+  margin-left: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #e7f0ff;
+  outline: none;
+}

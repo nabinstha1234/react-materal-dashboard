@@ -37,3 +37,126 @@
     transform: translateY(0px);
   }
 }
+
+.page-head-section {
+  height: 135px;
+  /* width: 1321px; */
+  display: flex;
+  flex-direction: row;
+  margin-left: 0px;
+  border-bottom: 2px solid #f3f5f9;
+  justify-content: space-between;
+  /* box-sizing: border-box; */
+  align-items: center;
+  padding: 0 24px;
+}
+.page-head {
+  font-size: 32px;
+  font-weight: 700;
+  font-family: Montserrat;
+  line-height: 39.01px;
+  color: #092e69;
+  height: 43px;
+  /* width: 255px; */
+  /* margin-left: 24px; */
+  margin-bottom: 10px;
+}
+.page-tag-line {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'Montserrat';
+  color: #848d96;
+}
+.modal-head-section {
+  padding: 30px 0;
+  /* height : 80px; */
+}
+.border-bottom {
+  border-bottom: 2px solid #f3f5f9;
+}
+.border {
+  border: 2px 2px 2px solid #f3f5f9;
+}
+
+.modal-inputs-section {
+  padding: 30px 0;
+  height: 250px;
+}
+.modal-input {
+  width: 95%;
+  height: 48px;
+  border-radius: 16px;
+  padding-left: 16px;
+  font-size: 16px;
+  margin: 0;
+  color: #000f28;
+}
+.select-input {
+  border-radius: 15px;
+  font-size: 14px;
+  background-color: #f4f8fb;
+  display: flex;
+  align-items: center;
+  width: 95%;
+  color: #000f28;
+}
+.text-red {
+  color: #f75b4f;
+}
+.bg-red {
+  background-color: #f75b4f !important;
+}
+.padding-24 {
+  padding: 24px;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 8px;
+  border: none;
+}
+.scrollbar::-webkit-scrollbar-track {
+  margin-left: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #e7f0ff;
+  outline: none;
+}
+.badge-bg {
+  background-color: #0a68ff;
+}
+.mr-50 {
+  margin-right: 50px;
+}
+.mr-20 {
+  margin-right: 20px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.pb-20 {
+  padding-bottom: 20px;
+}
+.d-flex {
+  display: flex !important;
+}
+
+.justify-content-between {
+  justify-content: space-between !important;
+}
+.align-items-center {
+  align-items: center;
+}
+.w-50 {
+  width: 50%;
+}
+.fs-12 {
+  font-size: 12px;
+}
+
+.rbc-month-row,
+.rbc-header,
+.rbc-month-view {
+  border: none !important;
+}
