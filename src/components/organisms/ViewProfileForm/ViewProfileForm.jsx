@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Divider, Stack, Typography, useTheme } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import moment from 'moment';
 
 import { TextField } from 'components/molecules';
 import { BadgeAvatar } from 'components/molecules';
+import { getCurrentUser } from 'features/auth/Api/auth';
 import userProfileDemo from 'assets/images/svg/user-profile-demo.svg';
 
 import { Item } from './styles';
@@ -24,8 +27,17 @@ const UserProfileSchema = Yup.object().shape({
 const ViewProfileForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const { userResponse } = useSelector((state) => state.auth);
 
-  const { control, handleSubmit } = useForm({
+  useEffect(() => {
+    const getUserProfile = async () => {
+      await dispatch(getCurrentUser());
+    };
+    getUserProfile();
+  }, [dispatch]);
+
+  const { control, handleSubmit, setValue } = useForm({
     defaultValues: {
       empId: '',
       joiningDate: '',
@@ -40,6 +52,17 @@ const ViewProfileForm = () => {
     shouldFocusError: true,
     resolver: yupResolver(UserProfileSchema),
   });
+
+  useEffect(() => {
+    setValue('employeeID', userResponse?.employeeID);
+    setValue('email', userResponse?.email);
+    setValue('phoneNumber', userResponse?.phoneNumber);
+    setValue('designation', userResponse?.designation);
+    setValue('dateOfBirth', moment(userResponse?.dateOfBirth).format('DD/MM/YYYY'));
+    setValue('personalEmail', userResponse?.personalEmail);
+    setValue('reportingPerson', userResponse?.reportingPerson);
+    setValue('dateOfJoining', moment(userResponse?.dateOfJoining).format('DD/MM/YYYY'));
+  }, [userResponse, setValue]);
 
   const onSubmit = (input) => {
     setIsSubmitting(true);
@@ -83,7 +106,7 @@ const ViewProfileForm = () => {
             >
               Abhisekh Sahoo
             </Typography>
-            <Typography variant="subtitle1">HR</Typography>
+            <Typography variant="subtitle1">{userResponse?.designation?.toUpperCase()}</Typography>
           </Item>
 
           <Item
@@ -105,7 +128,7 @@ const ViewProfileForm = () => {
             >
               <Controller
                 control={control}
-                name="empId"
+                name="employeeID"
                 render={({ field: { onChange, value }, fieldState: { error } }) => {
                   return (
                     <TextField
@@ -123,7 +146,7 @@ const ViewProfileForm = () => {
               />
               <Controller
                 control={control}
-                name="empId"
+                name="dateOfJoining"
                 render={({ field: { onChange, value }, fieldState: { error } }) => {
                   return (
                     <TextField
@@ -141,7 +164,7 @@ const ViewProfileForm = () => {
               />
               <Controller
                 control={control}
-                name="empId"
+                name="email"
                 render={({ field: { onChange, value }, fieldState: { error } }) => {
                   return (
                     <TextField
@@ -159,7 +182,7 @@ const ViewProfileForm = () => {
               />
               <Controller
                 control={control}
-                name="empId"
+                name="phoneNumber"
                 render={({ field: { onChange, value }, fieldState: { error } }) => {
                   return (
                     <TextField
@@ -187,7 +210,7 @@ const ViewProfileForm = () => {
             >
               <Controller
                 control={control}
-                name="empId"
+                name="designation"
                 render={({ field: { onChange, value }, fieldState: { error } }) => {
                   return (
                     <TextField
@@ -205,7 +228,7 @@ const ViewProfileForm = () => {
               />
               <Controller
                 control={control}
-                name="empId"
+                name="dateOfBirth"
                 render={({ field: { onChange, value }, fieldState: { error } }) => {
                   return (
                     <TextField
@@ -223,7 +246,7 @@ const ViewProfileForm = () => {
               />
               <Controller
                 control={control}
-                name="empId"
+                name="personalEmailI"
                 render={({ field: { onChange, value }, fieldState: { error } }) => {
                   return (
                     <TextField
@@ -241,7 +264,7 @@ const ViewProfileForm = () => {
               />
               <Controller
                 control={control}
-                name="empId"
+                name="reportingPerson"
                 render={({ field: { onChange, value }, fieldState: { error } }) => {
                   return (
                     <TextField

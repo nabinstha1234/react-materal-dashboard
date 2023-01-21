@@ -36,7 +36,6 @@ const ChangePasswordForm = ({ handleCloseModal }) => {
 
   const onSubmit = (data) => {
     setIsSubmitting(true);
-    console.log(data);
     AuthService.changePassword(data)
       .then((response) => {
         console.log(response, 'i am response');
